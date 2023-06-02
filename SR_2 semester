@@ -1,0 +1,28 @@
+class GameCharacter:
+    list_professions = ['крестьянин', 'горожанин', 'торговец', 'разбойник', 'герой', 'солдат']
+    def __init__(self, name, profession_index):
+        self.name = name
+        self.profession = self.list_professions[profession_index]
+        self.familiars = []
+    def greetings(self, other):
+        if self.profession == other.profession or other in self.familiars:
+            print("Привет! Как дела?")
+        elif self.profession == 'разбойник':
+            print("Кошелек или жизнь!")
+        else:
+            print("Здравствуйте!")
+            self.familiars.append(other)
+            other.familiars.append(self)
+    def getFamiliars(self):
+        for familiar in self.familiars:
+            print(f"{self.name} знаком с {familiar.name}")
+Bill = GameCharacter('Билл', 0)
+print(Bill.profession)
+Oliver = GameCharacter('Оливер', 0)
+Vilma = GameCharacter('Вильма', 2)
+Todd = GameCharacter('Тодд', 3)
+Oliver.greetings(Bill)
+Oliver.greetings(Vilma)
+Oliver.greetings(Vilma)
+Vilma.getFamiliars()
+Todd.greetings(Oliver)
